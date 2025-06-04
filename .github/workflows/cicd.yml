@@ -18,7 +18,7 @@ jobs:
           touch .env
           echo "${{Secret.VITE_AUTH_CLIENT_ID}}" > .env
       - name: Sign in to Docker Hub
-        run: docker login -u ${{DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}}
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Build Docker Image
         run: docker build -t hangeol1829/aicc6_task_front
       - name: Push Docker Image
