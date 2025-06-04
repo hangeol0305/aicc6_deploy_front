@@ -20,16 +20,16 @@ jobs:
       - name: Sign in to Docker Hub
         run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Build Docker Image
-        run: docker build -t hangeol1829/aicc6_task_front
+        run: docker build -t hangeol1829/aicc6_task_front .
       - name: Push Docker Image
-        run: docker push hangeol1829/aicc6_task_front
+        run: docker push hangeol1829/aicc6_task_front:latest
 
   deploy:
     needs: build
     runs-on: aws-ec2
     steps:
       - name: Pull image from docker Hub
-        run: docker pull hangeol1829/aicc6_task_front
+        run: docker pull hangeol1829/aicc6_task_front:latest
       - name: Delete Existing container
         run: docker rm -f task-container
       - name: Run Container
